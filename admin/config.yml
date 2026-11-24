@@ -1,0 +1,53 @@
+backend:
+  name: github
+  repo: renatmazevedo-canalfazendas/canalfazendas
+  branch: principal
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "catalogo"
+    label: "Fazendas (Descritivo e até 10 Mídias)"
+    files:
+      - label: "Lista de Fazendas"
+        name: "fazendas"
+        file: "fazendas.json"
+        fields:
+          - label: "Fazendas Cadastradas"
+            name: "itens"
+            widget: "list"
+            summary: "{{fields.titulo}}"
+            fields:
+              - { label: "Nome / Identificação da Fazenda", name: "titulo", widget: "string" }
+              - { label: "Descritivo da Fazenda", name: "descricao", widget: "text" }
+              - label: "Fotos e Vídeos (até 10 no total)"
+                name: "midias"
+                widget: "list"
+                max: 10
+                fields:
+                  - label: "Arquivo de Foto ou Vídeo"
+                    name: "arquivo"
+                    widget: "file"
+                    required: false
+                  - label: "Ou Link Direto (Foto / Vídeo)"
+                    name: "url"
+                    widget: "string"
+                    required: false
+                  - { label: "Legenda curta (opcional)", name: "legenda", widget: "string", required: false }
+
+  - name: "configuracoes"
+    label: "Destaques no YouTube (Capa + Texto)"
+    files:
+      - label: "Vídeos em Destaque"
+        name: "destaques_yt"
+        file: "destaques-youtube.json"
+        fields:
+          - label: "Cards em Destaque do YouTube"
+            name: "itens"
+            widget: "list"
+            summary: "{{fields.textoDestaque}}"
+            fields:
+              - { label: "Link do Vídeo no YouTube", name: "youtubeUrl", widget: "string" }
+              - { label: "Capa do Vídeo (Imagem)", name: "capa", widget: "image" }
+              - { label: "Texto de Destaque sobre a Capa", name: "textoDestaque", widget: "text" }
